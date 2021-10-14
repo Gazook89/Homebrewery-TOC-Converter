@@ -12,6 +12,7 @@ function convertLegacytoV3() {
         v3Text = v3Text.replace(regexHeading, `$1- ### [{{ $2 }}{{ $3}}](#p$3)`);
         v3Text = v3Text.replace(regexClose, `}}`);
         document.getElementById("outputText").value = v3Text;
+        document.getElementById("outputStyle").value = '';
     } else {
         alert('Please check formatting');
     }
