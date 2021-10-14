@@ -1,0 +1,24 @@
+.main {
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width:100%;
+}
+
+.textArea {
+    display:flex;
+    flex:1;
+    flex-direction: column;
+    margin: 5px;
+}
+
+.textArea textarea {
+    height:100px;
+    white-space:pre;
+}
+
+@media only screen and (max-width:701px){
+    .main {
+        flex-direction:column;
+    } 
+}
