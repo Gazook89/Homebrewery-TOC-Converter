@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="Convert Legacy Table of Contents to v3">
+        <title>Legacy to v3 Converter</title>
+    </head>
+    <body>
+        <h1>Legacy to v3 Converter</h1>
+        <p>Convert your Legacy Table of Contents to v3.</p>
+        <div class='main'>
+            <label for="legacyText">Legacy:</label><textarea id="legacyText" rows="10" cols="40" placeholder="Paste legacy ToC here:
+<div class='toc'>
+##### Table Of Contents
+- **[1 Mercury's Planet: Brave Evolution](#p1)**
+- **[2 Header 1](#p2)**
+    - [2.1 Header II](#p2)
+    - [2.1.1 Header III](#p2)
+    - [2.2 Stuff](#p3)
+    - [2.3 Class Features](#p3)
+- **[3 Spells](#p4)**
+</div>"></textarea>
+            <label for="outputText">Output:</label><textarea id="outputText" rows="10" cols="40" placeholder="v3 format will appear here"></textarea>
+        </div>
+        <button id="convertToV3Button" onclick="convertLegacytoV3()">Convert to v3</button>
+        <button id="convertToFancyButton" onclick="convertLegacytoFancyLegacy()">Convert to Fancy Legacy</button>
+    </body>
+    <script>
+        function convertLegacytoV3() {
+            let legacyText = document.getElementById("legacyText").value.length ? document.getElementById("legacyText").value : "No Content";
+            let v3Text;
+            // const regexFirstLine = /^(\s*<div\s)(.*)(>)$/gm;
+            const regexTOC = /.*class=['"].*?toc.*?['"].*/gm;
+            const regexTitle = /^##### (.*)/gm;
+            const regexHeading = /^( *).*\d (.*)\].*(\d+).*/gm;
+            const regexClose = /<\/div>/gm;
+            if(legacyText.match(regexTOC)){
+                v3Text = legacyText.replace(regexTOC, `{{toc,wide`);
+                v3Text = v3Text.replace(regexTitle, `# $1\n`);
+                v3Text = v3Text.replace(regexHeading, `$1- ### [{{ $2 }}{{ $3}}](#p$3)`);
+                v3Text = v3Text.replace(regexClose, `}}`);
+                document.getElementById("outputText").value = v3Text;
+            } else {
+                alert('Please check formatting');
+            }
+            
+        }
+
+        function convertLegacytoFancyLegacy() {
+            let legacyText = document.getElementById("legacyText").value.length ? document.getElementById("legacyText").value : "No Content";
+            let v3Text;
+            // const regexFirstLine = /^(\s*<div\s)(.*)(>)$/gm;
+            const regexTOC = /.*class=['"].*?toc.*?['"].*/gm;
+            const regexTitle = /^##### (.*)/gm;
+            const regexHeading = /^( *).*\d (.*)\].*(\d+).*/gm;
+            const regexClose = /<\/div>/gm;
+            if(legacyText.match(regexTOC)){
+                v3Text = legacyText.replace(regexTOC, `<div class="toc wide">\n`);
+                v3Text = v3Text.replace(regexTitle, `# $1\n`);
+                v3Text = v3Text.replace(regexHeading, `$1- ### [<span>$2</span><span>$3</span>](#p$3)`);
+                v3Text = v3Text.replace(regexClose, `\n</div>`);
+                document.getElementById("outputText").value = v3Text;
+            } else {
+                alert('Please check formatting');
+            }
+            
+        }
+    </script>
+</html>
+
+<!-- <div class='toc wide'>
+##### Table Of Contents
+- **[1 Mercury's Planet: Brave Evolution](#p1)**
+- **[2 Header 1](#p2)**
+  - [2.1 Header II](#p2)
+    - [2.1.1 Header III](#p2)
+  - [2.2 Stuff](#p3)
+  - [2.3 Class Features](#p3)
+- **[3 Spells](#p4)**
+</div>
+
+{{toc,wide
+# Table Of Contents
+
+- ### [{{ Mercury's Planet: Brave Evolution}}{{ 1}}](#p1)
+- ### [{{ Header 1}}{{ 2}}](#p2)
+  - #### [{{ Header II}}{{ 2}}](#p2)
+    - [{{ Header III}}{{ 2}}](#p2)
+  - #### [{{ Stuff}}{{ 3}}](#p3)
+  - #### [{{ Class Features}}{{ 3}}](#p3)
+- ### [{{ Spells}}{{ 4}}](#p4)
+}} -->
