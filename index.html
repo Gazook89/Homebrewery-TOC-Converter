@@ -4,11 +4,20 @@
         <meta charset="utf-8">
         <meta name="description" content="Convert Legacy Table of Contents to v3">
         <link rel="stylesheet" href="styles.css">
-        <title>Legacy to v3 Converter</title>
+        <title>Legacy ToC to v3 ToC</title>
     </head>
     <body>
-        <h1>Legacy to v3 Converter</h1>
-        <p>Convert your Legacy Table of Contents to v3.</p>
+        <h1>Legacy ToC to v3 ToC</h1>
+        <p>Recommended usage is for taking the default Legacy Table of Contents and turning it into a format that will work with v3's new styling.  Optionally, convert your Legacy ToC to v3 syntax for use with v3 renderer.*</p>
+        <p>This should work with any default Legacy ToC....any customizations likely won't be carried over.</p>
+        <ol>
+            <li>Create a new Legacy Table of Contents using the snippet from the Snippet Bar on Homebrewery.</li>
+            <li>Copy the entire generated snippet text, including the opening and closing div tags.</li>
+            <li>Paste into the "Legacy" text area.</li>
+            <li>Choose a conversion.</li>
+            <li>Copy the outputted text into the correct editors of your brew (Text Editor and Style Editor, if needed).</li>
+        </ol>
+        <small>* I don't recommend converting from Legacy to v3 syntax using this...if you are converting your whole brew from legacy to v3, it is likely better to delete the legacy ToC, do your conversion, and then generate a new v3 ToC using the v3 snippet.</small>
         <div class='main'>
             <div class="textArea">
                 <label for="legacyText">Legacy:</label>
@@ -25,11 +34,11 @@
 </div>"></textarea>
             </div>
             <div class="textArea">
-                <label for="outputText">Output:</label>
+                <label for="outputText">Text Editor:</label>
                 <textarea id="outputText" rows="10" cols="40" placeholder="v3 format will appear here"></textarea>
             </div>
             <div class="textArea">
-                <label for="outputStyle">Style:</label>
+                <label for="outputStyle">Style Editor:</label>
                 <textarea id="outputStyle" rows="10" cols="40" placeholder="styles will appear here"></textarea>
             </div>
         </div>
