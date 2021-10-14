@@ -18,6 +18,15 @@
     white-space:pre;
 }
 
+.buttons {
+    display:flex;
+    justify-content: center;
+}
+
+.buttons button {
+    margin: 0 5px;
+}
+
 @media only screen and (max-width:701px){
     .main {
         flex-direction:column;
