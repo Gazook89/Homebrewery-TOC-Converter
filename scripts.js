@@ -4,12 +4,16 @@ function convertLegacytoV3() {
     // const regexFirstLine = /^(\s*<div\s)(.*)(>)$/gm;
     const regexTOC = /.*class=['"].*?toc.*?['"].*/gm;
     const regexTitle = /^##### (.*)/gm;
-    const regexHeading = /^( *).*\d (.*)\].*(\d+).*/gm;
+    const regexHeading1 = /^-.*\d (.*)\].*(\d+).*/gm;
+    const regexHeading2 = /^(?: {2}|\t)-.*\d (.*)\].*(\d+).*/gm;
+    const regexHeading3 = /^(?: {4}|\t{2})-.*\d (.*)\].*(\d+).*/gm;
     const regexClose = /<\/div>/gm;
     if(legacyText.match(regexTOC)){
         v3Text = legacyText.replace(regexTOC, `{{toc,wide`);
         v3Text = v3Text.replace(regexTitle, `# $1\n`);
-        v3Text = v3Text.replace(regexHeading, `$1- ### [{{ $2 }}{{ $3}}](#p$3)`);
+        v3Text = v3Text.replace(regexHeading1, `- ### [{{$1}}{{$2}}](#p$2)`);
+        v3Text = v3Text.replace(regexHeading2, `  - #### [{{$1}}{{$2}}](#p$2)`);
+        v3Text = v3Text.replace(regexHeading3, `    - [{{$1}}{{$2}}](#p$2)`);
         v3Text = v3Text.replace(regexClose, `}}`);
         document.getElementById("outputText").value = v3Text;
         document.getElementById("outputStyle").value = '';
