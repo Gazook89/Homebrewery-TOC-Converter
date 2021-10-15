@@ -14,7 +14,7 @@
 }
 
 .textArea textarea {
-    height:100px;
+    height:400px;
     white-space:pre;
 }
 
@@ -25,6 +25,11 @@
 
 .buttons button {
     margin: 0 5px;
+}
+
+.footer {
+    margin-top:2em;
+    text-align:center;
 }
 
 @media only screen and (max-width:701px){
